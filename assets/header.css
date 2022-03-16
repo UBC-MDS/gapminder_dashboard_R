@@ -1,0 +1,87 @@
+.app {
+    padding: 10px;
+    background-color:#808D8E;
+    /* height: 100vh; */
+}
+
+.page_layout {
+    display: flex;
+    flex-direction: row;
+    height: 100%
+}
+
+.panel {
+    padding: 25px;
+    padding-top: 15px;
+    background-color: #143642;
+    border-radius: 10px;   
+    margin-right: 20px;
+    width: 30vw;
+    color: white
+}
+
+.body {
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    border-radius: 10px;
+    color: #5C0029;
+    padding: 15px;
+}
+
+.top-row {
+    display: flex;
+    flex-direction: row;
+    width: 70vw;
+    height: 60%;
+    justify-content: space-between;
+    text-align: center;
+}
+
+.bottom-row {
+    display: flex;
+    flex-direction: row;
+    width: 70vw;
+    height: 30%;
+    justify-content: space-around;
+    text-align: center;
+}
+
+.world-map {
+    width: 60%;
+    height: 80%;
+}
+
+.bar-plot {
+    width: 40%;
+    height: 100%
+}
+
+
+.bubble-plot {
+    height: 100%;
+    width: 50%;
+}
+
+.line-plot {
+    border-width: 0;
+    height: 100%;
+    width: 50%;
+}
+
+.plot {
+    border-width: 0;
+    height: 100%;
+    width: 100%;
+    padding: 10px;
+}
+
+
+.dropdown {
+    color: black
+}
+
+.radio {
+    display: flex;
+    flex-direction: column;
+}
