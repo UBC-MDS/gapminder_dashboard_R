@@ -256,19 +256,25 @@ app$callback(
     df = df %>%
       filter(year<=year_x)
     
-    # label_order <- df %>%
-    #   filter(year == max(df$year)) %>%
-    #   arrange(desc(!!sym(target)))
+    label_order <- df %>%
+      filter(year == max(df$year)) %>%
+      arrange(desc({{target}}))
+    
     df$label <- factor(df$label,
                        levels = c("World", continent_x, country_x))
-    
     p <- ggplot(df, aes(x = year,
                         y = target_study,
-                        color = label
+                        color = label,
+                        label = label
     )) +
       geom_line() +
       labs(x = "Year", y = target)+
-      ggthemes::scale_color_tableau()
+      geom_text(data = label_order, 
+                check_overlap = TRUE,
+                position = position_dodge(width = 2),
+                ) +
+      ggthemes::scale_color_tableau()+
+      theme(legend.position="none")
     return (ggplotly(p))
   }
 )
