@@ -177,8 +177,6 @@ app$layout(
     children = page_layout
   )
 )
-  
-
 app$callback(
   output("bar_chart", "figure"),
   list(
