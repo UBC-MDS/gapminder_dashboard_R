@@ -212,7 +212,7 @@ app$callback(
     # input("target_input_y", "value"),
     input("region_input", "value"),
     input("year_input", "value"),
-    input("target_input_x", "value")
+    input("target_input_y", "value")
   ),
   function(region_f, year_f, target) {
     gap_f <- gap %>%
