@@ -46,7 +46,7 @@ filter_panel <- htmlDiv(
     htmlBr(),
     htmlBr(),
     htmlH3("Filters", className = "text-primary"),
-    htmlH5("Target of Study", className = "text-dark"),
+    htmlH4("Target of Study", className = "text-dark"),
     dccDropdown(
       id = "target_input_y",
       className = "dropdown",
@@ -74,8 +74,15 @@ filter_panel <- htmlDiv(
           )
         })
     ),
+    # htmlBr(),
+    htmlH5("Interpretation of Target of Study:"),
+    htmlH5("- Population is number of people living"),
+    htmlH5("- Income is GDP per capita adjusted for purchasing power"),
+    htmlH5("- Children per Woman is the number of children born to each woman"),
+    htmlH5("- Child Mortality is deaths of children under 5 per 1000 live births"),
+    htmlH5("- Population Density is average number of people per km2"),
     htmlBr(),
-    htmlH5("Region"),
+    htmlH4("Region"),
     dccRadioItems(
       id = "region_input",
       className = "radio",
@@ -85,7 +92,7 @@ filter_panel <- htmlDiv(
           purrr::map(function(region) list(label = region, value = region))
     ),
     htmlBr(),
-    htmlH5("Country"),
+    htmlH4("Country"),
     dccDropdown(
       id = "country_input",
       className = "dropdown",
@@ -100,7 +107,7 @@ filter_panel <- htmlDiv(
         })
     ),
     htmlBr(),
-    htmlH5("Year"),
+    htmlH4("Year"),
     # htmlBr(),
     dccSlider(
       id = "year_input",
@@ -310,4 +317,5 @@ app$callback(
   }
 )
 
+#app$run_server(debug=T)
 app$run_server(host = '0.0.0.0')
