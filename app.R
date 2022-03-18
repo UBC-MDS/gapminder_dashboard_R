@@ -177,6 +177,17 @@ app$layout(
     children = page_layout
   )
 )
+    
+    
+app$callback(
+  output("bar_chart", "figure"),
+  list(
+    input("target_input_y", "value"),
+    input("region_input", "value"),
+    input("year_input", "value"),
+    input("target_input_x", "value")
+  ),
+)
 
 app$callback(
   output("bubble_plot", "figure"),
