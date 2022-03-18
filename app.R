@@ -138,11 +138,11 @@ plot_body <- htmlDiv(
           className = "world-map"
         ),
         dbcCol(
-            list(
-                ### Second plot goes here
-                dccGraph(id = "bar_chart")
-            ),
-            className = "bar_chart"
+          list(
+            ### Second plot goes here
+            dccGraph(id = "bar_chart")
+          ),
+          className = "bar_chart"
         )
       ),
       className = "top-row",
@@ -152,7 +152,7 @@ plot_body <- htmlDiv(
         dbcCol(
           list(
             ### Third plot goes here
-            dccGraph(id='line_plot')
+            dccGraph(id = "line_plot")
           ),
           className = "line-plot"
         ),
@@ -196,19 +196,25 @@ app$callback(
     gap_f <- gap %>%
       filter(region == region_f, year == year_f) %>%
       select(region, country, year, !!sym(target))
-    
-    gap_f <- gap_f %>% arrange(desc(!!sym(target))) %>% head(10)
 
-    p <- ggplot(gap_f, aes(x = !!sym(target),
-                           y = reorder(country, !!sym(target)))) +
+    gap_f <- gap_f %>%
+      arrange(desc(!!sym(target))) %>%
+      head(10)
+
+    p <- ggplot(gap_f, aes(
+      x = !!sym(target),
+      y = reorder(country, !!sym(target))
+    )) +
       geom_col(show.legend = FALSE, fill = "blue") +
-      labs(y = "Country", x = labels[[target]],
-           title = "Top 10 countries")
+      labs(
+        y = "Country", x = labels[[target]],
+        title = "Top 10 countries"
+      )
 
-    ggplotly(p)
+    ggplotly(p) %>% layout(autosize = F, width = 300, height = 400)
   }
 )
-    
+
 app$callback(
   output("bubble_plot", "figure"),
   list(
@@ -229,9 +235,11 @@ app$callback(
         color = population
       )) +
       geom_point() +
-      labs(x = labels[[x]],
-           y = labels[[y]],
-           title = paste0(labels[[y]], " vs ", labels[[x]]))
+      labs(
+        x = labels[[x]],
+        y = labels[[y]],
+        title = paste0(labels[[y]], " vs ", labels[[x]])
+      )
     ggplotly(p)
   }
 )
@@ -262,60 +270,64 @@ app$callback(
 )
 
 app$callback(
-  output('line_plot', 'figure'),
-  list(input('target_input_y', 'value'),
-       input('region_input', 'value'),
-       input('country_input', 'value'),
-       input('year_input', 'value')),
+  output("line_plot", "figure"),
+  list(
+    input("target_input_y", "value"),
+    input("region_input", "value"),
+    input("country_input", "value"),
+    input("year_input", "value")
+  ),
   function(target, continent_x, country_x, year_x) {
-    
-    # World 
-    df = gap %>%
-      group_by(year) %>% 
+
+    # World
+    df <- gap %>%
+      group_by(year) %>%
       summarise(target_study = mean(!!sym(target))) %>%
       mutate(label = "World")
-    
+
     # Region
     df_continent <- gap %>%
       filter(region == continent_x) %>%
       group_by(year) %>%
       summarise(target_study = mean(!!sym(target))) %>%
       mutate(label = continent_x)
-    
+
     # Country
     df_country <- gap %>%
       filter(country == country_x) %>%
       group_by(year) %>%
       summarise(target_study = mean(!!sym(target))) %>%
       mutate(label = country_x)
-    
+
     # Year
-    df = rbind(df,df_continent, df_country)
-    df = df %>%
-      filter(year<=year_x)
-    
+    df <- rbind(df, df_continent, df_country)
+    df <- df %>%
+      filter(year <= year_x)
+
     label_order <- df %>%
       filter(year == max(df$year)) %>%
-      arrange(desc({{target}}))
-    
+      arrange(desc({{ target }}))
+
     df$label <- factor(df$label,
-                       levels = c("World", continent_x, country_x))
-    p <- ggplot(df, aes(x = year,
-                        y = target_study,
-                        color = label,
-                        label = label
+      levels = c("World", continent_x, country_x)
+    )
+    p <- ggplot(df, aes(
+      x = year,
+      y = target_study,
+      color = label,
+      label = label
     )) +
       geom_line() +
-      labs(x = "Year", y = target)+
-      geom_text(data = label_order, 
-                check_overlap = TRUE,
-                position = position_dodge(width = 2),
-                ) +
-      ggthemes::scale_color_tableau()+
-      theme(legend.position="none")
-    return (ggplotly(p))
+      labs(x = "Year", y = target) +
+      geom_text(
+        data = label_order,
+        check_overlap = TRUE,
+        position = position_dodge(width = 2),
+      ) +
+      ggthemes::scale_color_tableau() +
+      theme(legend.position = "none")
+    return(ggplotly(p))
   }
 )
 
-#app$run_server(debug=T)
-app$run_server(host = '0.0.0.0')
+app$run_server(host = "0.0.0.0")
