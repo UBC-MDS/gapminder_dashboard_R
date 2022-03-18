@@ -1,7 +1,7 @@
 library(dash)
 library(dashHtmlComponents)
 library(dashCoreComponents)
-library(dashBootstrapComponents)
+#library(dashBootstrapComponents)
 
 library(ggplot2)
 library(dplyr)
@@ -132,7 +132,11 @@ plot_body <- htmlDiv(
           className = "world-map"
         ),
         dbcCol(
-          ### Second plot goes here
+            list(
+                ### Second plot goes here
+                dccGraph(id = "bar_chart")
+            ),
+            className = "bar_chart"
         )
       ),
       className = "top-row",
