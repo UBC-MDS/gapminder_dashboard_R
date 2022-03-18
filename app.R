@@ -43,10 +43,10 @@ labels <- list(
 filter_panel <- htmlDiv(
   list(
     htmlH2("Gapminder Dashboard"),
-    htmlBr(),
-    htmlBr(),
-    htmlH3("Filters", className = "text-primary"),
-    htmlH4("Target of Study", className = "text-dark"),
+    # htmlBr(),
+    # htmlBr(),
+    htmlH3("Filters", className = "text-primary", style = list("margin-bottom" = "0px")),
+    htmlH4("Target of Study", className = "text-dark", style = list("margin" = "7px")),
     dccDropdown(
       id = "target_input_y",
       className = "dropdown",
@@ -72,17 +72,18 @@ filter_panel <- htmlDiv(
             label = labels[[target_options_value]],
             value = target_options_value
           )
-        })
+        }),
+      style = list("margin-bottom" = "7px")
     ),
     # htmlBr(),
-    htmlH5("Interpretation of Target of Study:"),
-    htmlH5("- Population is number of people living"),
-    htmlH5("- Income is GDP per capita adjusted for purchasing power"),
-    htmlH5("- Children per Woman is the number of children born to each woman"),
-    htmlH5("- Child Mortality is deaths of children under 5 per 1000 live births"),
-    htmlH5("- Population Density is average number of people per km2"),
-    htmlBr(),
-    htmlH4("Region"),
+    htmlH4("Interpretation of Target of Study:", style = list("margin-bottom" = "7px")),
+    htmlH6("- Population is number of people living", style = list("margin" = "0px")),
+    htmlH6("- Income is GDP per capita adjusted for purchasing power", style = list("margin" = "0px")),
+    htmlH6("- Children per Woman is the number of children born to each woman", style = list("margin" = "0px")),
+    htmlH6("- Child Mortality is deaths of children under 5 per 1000 live births", style = list("margin" = "0px")),
+    htmlH6("- Population Density is average number of people per km2", style = list("margin" = "0px")),
+    # htmlBr(),
+    htmlH4("Region", style = list("margin-bottom" = "4px")),
     dccRadioItems(
       id = "region_input",
       className = "radio",
@@ -91,8 +92,8 @@ filter_panel <- htmlDiv(
         gap %>% pull(region) %>% unique() %>%
           purrr::map(function(region) list(label = region, value = region))
     ),
-    htmlBr(),
-    htmlH4("Country"),
+    # htmlBr(),
+    htmlH4("Country", style = list("margin-bottom" = "4px")),
     dccDropdown(
       id = "country_input",
       className = "dropdown",
@@ -106,8 +107,8 @@ filter_panel <- htmlDiv(
           )
         })
     ),
-    htmlBr(),
-    htmlH4("Year"),
+    # htmlBr(),
+    htmlH4("Year", style = list("margin-bottom" = "4px")),
     # htmlBr(),
     dccSlider(
       id = "year_input",
@@ -208,10 +209,10 @@ app$callback(
       geom_col(show.legend = FALSE, fill = "blue") +
       labs(
         y = "Country", x = labels[[target]],
-        title = "Top 10 countries"
+        title = paste0("Top 10 countries in ", region_f)
       )
 
-    ggplotly(p) %>% layout(autosize = F, width = 300, height = 400)
+    ggplotly(p, width = 400, height = 400)
   }
 )
 
@@ -318,7 +319,7 @@ app$callback(
       label = label
     )) +
       geom_line() +
-      labs(x = "Year", y = target) +
+      labs(x = "Year", y = labels[[target]], title = paste0(labels[[target]], " over time ")) +
       geom_text(
         data = label_order,
         check_overlap = TRUE,
@@ -330,4 +331,5 @@ app$callback(
   }
 )
 
+# app$run_server(debug=T)
 app$run_server(host = "0.0.0.0")
