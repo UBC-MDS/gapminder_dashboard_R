@@ -103,12 +103,19 @@ filter_panel <- htmlDiv(
     htmlBr(),
     htmlH5("Year"),
     # htmlBr(),
-    dccDropdown(
+    dccSlider(
       id = "year_input",
-      className = "dropdown",
-      options = gap %>% pull(year) %>% unique() %>%
-        purrr::map(function(year) list(label = year, value = year)),
-      value = 1970
+      min = 1950,
+      max = 2018,
+      step = 1,
+      marks = list(
+        "1950" = "1950",
+        "1975" = "1975",
+        "2000" = "2000",
+        "2018" = "2018"
+      ),
+      value = 1970,
+      tooltip = list(placement = "bottom")
     )
   )
 )
@@ -135,6 +142,7 @@ plot_body <- htmlDiv(
         dbcCol(
           list(
             ### Third plot goes here
+            dccGraph(id='line_plot')
           ),
           className = "line-plot"
         ),
@@ -212,6 +220,62 @@ app$callback(
       layout(title = paste0(labels[[stat]], " for ", region))
 
     ggplotly(map_plot)
+  }
+)
+
+app$callback(
+  output('line_plot', 'figure'),
+  list(input('target_input_y', 'value'),
+       input('region_input', 'value'),
+       input('country_input', 'value'),
+       input('year_input', 'value')),
+  function(target, continent_x, country_x, year_x) {
+    
+    # World 
+    df = gap %>%
+      group_by(year) %>% 
+      summarise(target_study = mean(!!sym(target))) %>%
+      mutate(label = "World")
+    
+    # Region
+    df_continent <- gap %>%
+      filter(region == continent_x) %>%
+      group_by(year) %>%
+      summarise(target_study = mean(!!sym(target))) %>%
+      mutate(label = continent_x)
+    
+    # Country
+    df_country <- gap %>%
+      filter(country == country_x) %>%
+      group_by(year) %>%
+      summarise(target_study = mean(!!sym(target))) %>%
+      mutate(label = country_x)
+    
+    # Year
+    df = rbind(df,df_continent, df_country)
+    df = df %>%
+      filter(year<=year_x)
+    
+    label_order <- df %>%
+      filter(year == max(df$year)) %>%
+      arrange(desc({{target}}))
+    
+    df$label <- factor(df$label,
+                       levels = c("World", continent_x, country_x))
+    p <- ggplot(df, aes(x = year,
+                        y = target_study,
+                        color = label,
+                        label = label
+    )) +
+      geom_line() +
+      labs(x = "Year", y = target)+
+      geom_text(data = label_order, 
+                check_overlap = TRUE,
+                position = position_dodge(width = 2),
+                ) +
+      ggthemes::scale_color_tableau()+
+      theme(legend.position="none")
+    return (ggplotly(p))
   }
 )
 
