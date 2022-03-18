@@ -1,7 +1,6 @@
 library(dash)
 library(dashHtmlComponents)
 library(dashCoreComponents)
-#library(dashBootstrapComponents)
 
 library(ggplot2)
 library(dplyr)
@@ -132,11 +131,11 @@ plot_body <- htmlDiv(
           className = "world-map"
         ),
         dbcCol(
-          list(
-            ### Second plot goes here
-            dccGraph(id = "bar_chart")
-           ),
-           className = "bar_chart"
+            list(
+                ### Second plot goes here
+                dccGraph(id = "bar_chart")
+            ),
+            className = "bar_chart"
         )
       ),
       className = "top-row",
@@ -176,33 +175,6 @@ app$layout(
     className = "app",
     children = page_layout
   )
-)
-    
-    
-app$callback(
-  output("bar_chart", "figure"),
-  list(
-    input("target_input_y", "value"),
-    input("region_input", "value"),
-    input("year_input", "value"),
-    input("target_input_x", "value")
-  ),
-  function(target, region_f, year_f) {
-    gap_f <- gap %>%
-      filter(region == region_f, year == year_f) %>%
-      select(region, country, year, target)
-
-    colnames(gap_f)[4] <- "target"
-    gap_f <- gap_f[order(-gap_f$target),][1:10,]
-
-    p <- ggplot(gap_f, aes(x = target,
-                           y = reorder(country, target))) +
-      geom_col(show.legend = FALSE, fill = "blue") +
-      labs(y = "Country", x = target,
-           title = "Top 10 countries")
-
-    ggplotly(p)
-  }
 )
 
 app$callback(
@@ -336,4 +308,4 @@ app$callback(
   }
 )
 
-app$run_server(debug = T)
+app$run_server(host = '0.0.0.0')
