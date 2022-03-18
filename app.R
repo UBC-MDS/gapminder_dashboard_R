@@ -180,23 +180,22 @@ app$layout(
 app$callback(
   output("bar_chart", "figure"),
   list(
-    input("target_input_y", "value"),
+    # input("target_input_y", "value"),
     input("region_input", "value"),
     input("year_input", "value"),
-    input("target_input_x", "value")
+    input("target_input_y", "value")
   ),
-  function(target, region_f, year_f) {
+  function(region_f, year_f, target) {
     gap_f <- gap %>%
       filter(region == region_f, year == year_f) %>%
-      select(region, country, year, target)
+      select(region, country, year, !!sym(target))
+    
+    gap_f <- gap_f %>% arrange(desc(!!sym(target))) %>% head(10)
 
-    colnames(gap_f)[4] <- "target"
-    gap_f <- gap_f[order(-gap_f$target),][1:10,]
-
-    p <- ggplot(gap_f, aes(x = target,
-                           y = reorder(country, target))) +
+    p <- ggplot(gap_f, aes(x = !!sym(target),
+                           y = reorder(country, !!sym(target)))) +
       geom_col(show.legend = FALSE, fill = "blue") +
-      labs(y = "Country", x = target,
+      labs(y = "Country", x = labels[[target]],
            title = "Top 10 countries")
 
     ggplotly(p)
@@ -222,7 +221,10 @@ app$callback(
         y = !!sym(y),
         color = population
       )) +
-      geom_point()
+      geom_point() +
+      labs(x = labels[[x]],
+           y = labels[[y]],
+           title = paste0(labels[[y]], " vs ", labels[[x]]))
     ggplotly(p)
   }
 )
