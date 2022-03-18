@@ -15,6 +15,7 @@ The global map is presented at the bottom of the dashboard with a tooltip for ea
 ## Useful link
 
 - 📊 [Dashboard Link](https://dsci532-2022-gapminder-app.herokuapp.com/)
+- [Github Repo](https://github.com/UBC-MDS/gapminder_dashboard_R)
 - 🗺 [Gapminder website](https://www.gapminder.org/)
 
 ## Dashboard Sketch Design
@@ -46,7 +47,7 @@ conda create --name gapminder --file requirements.txt
 Then run the following command:
 
 ```bash
-Rscript src/app.R
+Rscript app.R
 ```
 
 ## Contributing 
