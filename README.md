@@ -53,7 +53,7 @@ Rscript src/app.R
 
 Interested in contributing? Check out the contributing guidelines. Please note that this project is released with a Code of Conduct. By contributing to this project, you agree to abide by its terms.
 
-For this project, we used `Dash` for dashboarding, `Ggplot` for charts, and `Heroku` for deployment. Please follow the `Usage and Installation` to install and run the app locally.
+For this project, we used `Dash` for dashboarding, `Ggplotly` for charts, and `Heroku` for deployment. Please follow the `Usage and Installation` to install and run the app locally.
 
 ## Contributors
 
