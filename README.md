@@ -21,9 +21,39 @@ The global map is presented at the bottom of the dashboard with a tooltip for ea
 
 ![sketch of the app](img/app_sketch.png "App Sketch")
 
+## Usage and Installation
+
+### Clone the repo
+
+```
+git clone https://github.com/UBC-MDS/gapminder_dashboard_R.git
+```
+
+Navigate to the folder and install via the method of preference:
+
+### Install via pip
+
+```bash
+pip install -r requirements.txt
+```
+
+### Install with Conda environment
+
+```bash
+conda create --name gapminder --file requirements.txt
+```
+
+Then run the following command:
+
+```bash
+Rscript src/app.R
+```
+
 ## Contributing 
 
 Interested in contributing? Check out the contributing guidelines. Please note that this project is released with a Code of Conduct. By contributing to this project, you agree to abide by its terms.
+
+For this project, we used `Dash` for dashboarding, `Ggplot` for charts, and `Heroku` for deployment. Please follow the `Usage and Installation` to install and run the app locally.
 
 ## Contributors
 
