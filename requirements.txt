@@ -1,0 +1,9 @@
+dash
+dplyr
+purrr
+dashHtmlComponents
+dashCoreComponents
+ggplot2
+plotly
+remotes
+ggthemes
