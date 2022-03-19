@@ -1,6 +1,6 @@
 # Gapminder dashboard
 
-![app_usage](https://user-images.githubusercontent.com/88474134/156894591-9d7a9b26-01a1-4a10-b6b5-a4979539040f.gif)
+![app](https://user-images.githubusercontent.com/88474134/159116817-e4adbf04-17c6-42c6-a5d9-c13ff12ae878.gif)
 
 
 ## Decription of the app
@@ -14,7 +14,7 @@ The global map is presented at the bottom of the dashboard with a tooltip for ea
 
 ## Useful link
 
-- 📊 [Dashboard Link](https://dsci532-2022-gapminder-app.herokuapp.com/)
+- 📊 [Dashboard Link](https://dsci532-2022-gapminder-app-r.herokuapp.com/)
 - [Github Repo](https://github.com/UBC-MDS/gapminder_dashboard_R)
 - 🗺 [Gapminder website](https://www.gapminder.org/)
 
