@@ -30,18 +30,12 @@ The global map is presented at the bottom of the dashboard with a tooltip for ea
 git clone https://github.com/UBC-MDS/gapminder_dashboard_R.git
 ```
 
-Navigate to the folder and install via the method of preference:
+Navigate to the folder and install the dependencies:
 
-### Install via pip
-
-```bash
-pip install -r requirements.txt
-```
-
-### Install with Conda environment
+### Install via init.R
 
 ```bash
-conda create --name gapminder --file requirements.txt
+Rscript init.R
 ```
 
 Then run the following command:
@@ -49,6 +43,8 @@ Then run the following command:
 ```bash
 Rscript app.R
 ```
+
+Finally, use any modern web browser, visit http://127.0.0.1:8050/ to access the app.
 
 ## Contributing 
 
