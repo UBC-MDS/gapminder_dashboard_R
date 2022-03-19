@@ -14,7 +14,7 @@ The global map is presented at the bottom of the dashboard with a tooltip for ea
 
 ## Useful link
 
-- 📊 [Dashboard Link](https://dsci532-2022-gapminder-app.herokuapp.com/)
+- 📊 [Dashboard Link](https://dsci532-2022-gapminder-app-r.herokuapp.com/)
 - [Github Repo](https://github.com/UBC-MDS/gapminder_dashboard_R)
 - 🗺 [Gapminder website](https://www.gapminder.org/)
 
