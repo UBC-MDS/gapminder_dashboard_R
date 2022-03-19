@@ -29,12 +29,12 @@ target_options_value <- c(
 targets_df <- data.frame(target_options_value)
 
 labels <- list(
-  "population" = "Population",
-  "income" = "Income",
-  "life_expectancy" = "Life Expectancy",
-  "child_mortality" = "Child Mortality",
-  "children_per_woman" = "Children per Woman",
-  "pop_density" = "Population Density"
+  "population" = "Population (number of people)",
+  "income" = "Income (USD)",
+  "life_expectancy" = "Life Expectancy (years)",
+  "child_mortality" = "Child Mortality (deaths per 1000)",
+  "children_per_woman" = "Children per Woman (number)",
+  "pop_density" = "Population Density (people per km2)"
 )
 
 
