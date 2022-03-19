@@ -16,9 +16,9 @@ The dashboard covers a wide range of socio-economic parameters that can be analy
 
 ## Issues with Heroku Deployment
 
-The R app is working fine locally. But when we deploy it on Heroku, we observe a few discrepancies. 
--	We observe that the target values selected from filters is not correctly reflected in the charts. It is to be noted that the the other filter elements - region and year - are correctly getting selected. We have tried to re-confirmed that the variable names are correctly used. We have used different HTML components to check of something else works. But, we have not been able to fix this issue for the deployed app. This is a known issue and will be updated in the next version.
--	We notice that the legend on the map is not properly positioned compared to the position of the map. We tried searched on internet and tried multiple code pieces but this has not been fixed. This is a known issue and will be updated in the next version.
+The R app is working fine locally. But when we deploy it on Heroku, we observe a few discrepancies: 
+-	We observe that the target values selected from filters is not correctly reflected in the charts. It is to be noted that the other filter elements - region, country and year - are correctly getting selected. We have re-confirmed that the variable names are correctly used in the callback functions. We have also tested different HTML components to check if something else works. But, we have not been able to fix this issue for the deployed app. This is a known issue and will be updated in the next version.
+-	We notice that the legend on the map is not properly positioned compared to the position of the map. We searched on internet and tried multiple code recommendations but this has not been fixed. This is a known issue and will be updated in the next version.
 
 ## Limitations and Improvement Areas
 
